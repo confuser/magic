@@ -9,7 +9,11 @@ describe('loads default config', function(done) {
 
   var config;
   before(function(done) {
-    a127config.reload(function(conf) {
+    a127config.reload(function(error, conf) {
+      if (error) {
+        return done(error);
+      }
+
       config = conf;
       done();
     });
@@ -52,7 +56,11 @@ describe('loads config hierarchy', function() {
   var config;
 
   before(function(done) {
-    a127config.load('development', function(conf) {
+    a127config.load('development', function(error, conf) {
+      if (error) {
+        return done(error);
+      }
+
       config = conf;
       done();
     });

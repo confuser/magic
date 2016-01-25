@@ -12,7 +12,11 @@ describe('resource', function() {
 
   var config;
   before(function(done) {
-    a127config.load(function(conf) {
+    a127config.load(function(error, conf) {
+      if (error) {
+        return done(error);
+      }
+
       config = conf;
       config['a127.magic'].swaggerFile = SWAGGER_FILE;
       done();

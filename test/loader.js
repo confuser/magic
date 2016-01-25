@@ -29,7 +29,11 @@ describe('loader', function() {
 
     it('empty config must not change the structure', function(done) {
 
-      a127config.load(function(config) {
+      a127config.load(function(error, config) {
+        if (error) {
+          return done(error);
+        }
+
         var originalSwagger = yaml.load(SWAGGER_FILE);
         var convertedSwagger = loader.load(SWAGGER_FILE, {});
 
@@ -41,7 +45,11 @@ describe('loader', function() {
 
     it('must load and replace config', function(done) {
 
-      a127config.reload(function(config) {
+      a127config.reload(function(error, config) {
+        if (error) {
+          return done(error);
+        }
+
         var swaggerObject = loader.load(SWAGGER_FILE, config);
 
         var swaggerConfig = swaggerObject['x-a127-config'];

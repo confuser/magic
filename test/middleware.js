@@ -10,7 +10,11 @@ describe('middleware', function() {
 
   var config;
   before(function(done) {
-    a127config.load(function(conf) {
+    a127config.load(function(error, conf) {
+      if (error) {
+        return done(error);
+      }
+
       config = conf;
       done();
     });
